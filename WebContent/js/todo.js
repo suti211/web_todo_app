@@ -1,8 +1,8 @@
-function loadTodos(){
+function loadTodos(array){
 	$.get("ToDoServlet", {get : "todos"}, function(response){
 		
+		//console.log(response);
 		response.forEach(function(element){			
-//			$("#todo-storage").append("<div class=\"todo\" index=\"" + i.id + "\"><h3>" + i.name + "</h3><button class=\"todobtn\">Delete</button><button class=\"todobtn\">Done</button></div>");
 			var todo = document.createElement("div");
 			todo.classList.add("todo");
 			var attribute = document.createAttribute("index");
@@ -18,29 +18,72 @@ function loadTodos(){
 			doneButton.textContent = "Done";
 			doneButton.classList.add("donebtn");
 			
+			if(element.state == "DONE"){
+				todo.classList.add("todo-done");
+			}
+
 			todo.append(h3);
 			
 			h3.textContent = element.name;
 			
 			delButton.onclick = function(){
-				$.post("ToDoServlet", {post : "remove", rID : element.id}, )
-				todo.remove();
+				$.post("ToDoServlet", {post : "remove", rID : element.id}, function(){
+					todo.remove();
+				});
 			};
 			
 			doneButton.onclick = function(){
-				
+				$.post("ToDoServlet", { post : "changeState", index : element.id}, function(){
+					array = [];
+					loadTodos(array);
+				});
 			}
 			
 			todo.append(delButton);
-			todo.append(doneButton);
-			$("#todo-storage").append(todo);
+
+			if(element.state != "DONE"){
+				todo.append(doneButton);
+			}
+			
+			//$("#todo-storage").append(todo);
+			array.push(todo);
+			insertTodos(array);
 		});
-		
-//		console.log(todoArray);
+	});
+}
+
+//num1
+function addTodos(array){
+	var todoName = $("#todo-input").val();
+	$.post("ToDoServlet", {post : "add" , name : todoName}, function(){
+		$("#todo-input").val("");
+		array = [];
+		loadTodos(array);
+	});
+}
+
+function insertTodos(niggarray){
+	$("#todo-storage").empty();
+	var test = document.querySelector("#todo-storage");
+	niggarray.forEach(function(element){
+		test.appendChild(element);
 	});
 }
 
 $(document).ready(function(){
-//	$("#ciganygomb").click(loadTodos);
-	loadTodos();
+	var todoArray = [];
+	loadTodos(todoArray);
+	$(".addbtn").click(addTodos);
+
+	//detect enter on input field
+	$("#todo-input").on('keyup', function (e) {
+		if (e.keyCode == 13) {
+			addTodos(todoArray);
+		}
+	});
+
+	//console.log(todoArray);
+	//insertTodos(todoArray);
+	//$.when(loadTodos(todoArray)).then(insertTodos(todoArray));
+	
 });

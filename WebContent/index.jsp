@@ -21,19 +21,22 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6 todo-container">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<div class="todo-container">
 					<div class="title">
-						<h2>Yuro Tdoo Lsti</h2>
+						<h2>Your todo List</h2>
 					</div>
 					<div id="todo-storage">
 <!-- 						shit goes here -->
 					</div>
 					<div class="footer">
-						<button class="addbtn">Add new item</button>
+						<span class="todo-line"><span class="todo-text">New todo:</span><input type="text" id="todo-input"><button class="addbtn">Add new item</button></span>
+						
 					</div>
+				</div>
 			</div>
-			<div class="col-md-3"></div>
+			<div class="col-sm-1"></div>
 		</div>
 	</div>
 </body>

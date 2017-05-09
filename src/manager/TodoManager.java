@@ -1,8 +1,11 @@
 package manager;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collector;
+
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
 import model.IDataFucker;
 import model.State;
@@ -39,13 +42,24 @@ public class TodoManager implements IDataFucker {
 	}
 
 	@Override
-	public void changeTodoState(Todo todo, State state) {
+	public void changeTodoState(Todo todo) {
 		if(todo.getState() == State.DONE){
 			todo.setState(State.NOT_DONE);
 		} else {
 			todo.setState(State.DONE);
 		}
 		
+	}
+
+	@Override
+	public Todo addTodo(String name) {
+		Integer maxTodoIndex;
+		if(todos.size() != 0){
+			maxTodoIndex = todos.stream().max(Comparator.comparing(Todo::getId)).get().getId();	
+		}else {
+			maxTodoIndex = 0;
+		}
+		return new Todo(maxTodoIndex + 1, name, State.NOT_DONE);
 	}
 
 }
