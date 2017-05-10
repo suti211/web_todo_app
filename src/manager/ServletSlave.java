@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -26,7 +27,7 @@ public class ServletSlave {
 	}
 
 	public void sendTodos(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+		
 		if (request.getParameter("get") != null && request.getParameter("get").equals("todos")) {
 			String json = gson.toJson(getTodos());
 			response.setContentType("application/json");
@@ -76,6 +77,28 @@ public class ServletSlave {
 			}
 		} else {
 			System.out.println("msg or changeId is null at statechange");
+		}
+	}
+	
+	public void sendActiveTodos(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		if (request.getParameter("get") != null && request.getParameter("get").equals("activeTodos")) {
+			String json = gson.toJson(tm.getActiveTodos());
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			System.out.println("JsonObject Sent(activetodos)!");
+			out.flush();
+		}
+	}
+	
+	public void sendInactiveTodos(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		if (request.getParameter("get") != null && request.getParameter("get").equals("inactiveTodos")) {
+			String json = gson.toJson(tm.getInactiveTodos());
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			System.out.println("JsonObject Sent(inactivetodos)!");
+			out.flush();
 		}
 	}
 }
