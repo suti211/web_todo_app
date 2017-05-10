@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" session="false" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,6 +26,11 @@
 				<div class="todo-container">
 					<div class="title">
 						<h2>Your todo List</h2>
+					</div>
+					<div class="buttonrow">
+						<span class="filterButton" id="all">All</span>
+						<span class="filterButton" id="active">Active</span>
+						<span class="filterButton" id="done">Done</span>
 					</div>
 					<div id="todo-storage">
 <!-- 						shit goes here -->

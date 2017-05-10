@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
@@ -53,5 +54,17 @@ public class TodoManager implements IDataFucker {
 		}
 		return new Todo(maxTodoIndex + 1, name, State.NOT_DONE);
 	}
+
+	@Override
+	public List<Todo> getActiveTodos() {
+		return todos.stream().filter(todo -> todo.getState() == State.NOT_DONE).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Todo> getInactiveTodos() {
+		return todos.stream().filter(todo -> todo.getState() == State.DONE).collect(Collectors.toList());
+	}
+	
+	
 
 }
