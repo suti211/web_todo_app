@@ -15,15 +15,7 @@ public class TodoManager implements IDataFucker {
 	
 	private List<Todo> todos = new ArrayList<>();
 	public TodoManager(){
-		Todo todo = new Todo(0, "Kakapisi", State.NOT_DONE);
-		Todo todo1 = new Todo(1, "szarfos", State.NOT_DONE);
-		Todo todo2 = new Todo(2, "hugyszeklet", State.NOT_DONE);
-		Todo todo3 = new Todo(3, "végbél", State.NOT_DONE);
-		todos.add(todo);
-		todos.add(todo1);
-		todos.add(todo2);
-		todos.add(todo3);
-		
+	
 	}
 	
 	@Override
