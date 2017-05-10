@@ -14,24 +14,23 @@ import model.Todo;
 
 public class TodoManager implements IDataFucker {
 	
-	private List<Todo> todos = new ArrayList<>();
 	public TodoManager(){
 	
 	}
 	
 	@Override
-	public List<Todo> getTodos() {
-		return todos;
+	public List<Todo> getTodos(List<Todo> list) {
+		return list;
 	}
 
 	@Override
-	public Todo getTodo(Integer id) {
-		return todos.stream().filter((todo) -> todo.getId() == id).findFirst().get();
+	public Todo getTodo(Integer id, List<Todo> list) {
+		return list.stream().filter((todo) -> todo.getId() == id).findFirst().get();
 	}
 
 	@Override
-	public void deleteTodo(Integer id) {
-		todos.remove(getTodo(id));
+	public void deleteTodo(Integer id, List<Todo> list) {
+		list.remove(getTodo(id, list));
 	}
 
 	@Override
@@ -45,10 +44,10 @@ public class TodoManager implements IDataFucker {
 	}
 
 	@Override
-	public Todo addTodo(String name) {
+	public Todo addTodo(String name, List<Todo> list) {
 		Integer maxTodoIndex;
-		if(todos.size() != 0){
-			maxTodoIndex = todos.stream().max(Comparator.comparing(Todo::getId)).get().getId();	
+		if(list.size() != 0){
+			maxTodoIndex = list.stream().max(Comparator.comparing(Todo::getId)).get().getId();	
 		}else {
 			maxTodoIndex = 0;
 		}
@@ -56,13 +55,13 @@ public class TodoManager implements IDataFucker {
 	}
 
 	@Override
-	public List<Todo> getActiveTodos() {
-		return todos.stream().filter(todo -> todo.getState() == State.NOT_DONE).collect(Collectors.toList());
+	public List<Todo> getActiveTodos(List<Todo> list) {
+		return list.stream().filter(todo -> todo.getState() == State.NOT_DONE).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Todo> getInactiveTodos() {
-		return todos.stream().filter(todo -> todo.getState() == State.DONE).collect(Collectors.toList());
+	public List<Todo> getInactiveTodos(List<Todo> list) {
+		return list.stream().filter(todo -> todo.getState() == State.DONE).collect(Collectors.toList());
 	}
 	
 	
