@@ -102,12 +102,15 @@ body, html {
 .buttonrow{
 	border-bottom: solid 2px;
 	margin: 5px;
+	margin-left: 0px;
+	margin-right: 0px;
 	padding-bottom: 4px;
 }
 
 span.filterButton {
 	font-size: 18px;
 	margin: 5px;
+	
 	background-color: #ccc0c0;
 	border-radius: 2px 2px 2px 2px;
 	width: 50px;
@@ -123,3 +126,51 @@ span.filterButton.active{
 	background-color: #656464;
 	color: white;
 }
+
+.login{
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 10px;
+	text-align: center;
+}
+
+#email{
+	margin: 0 auto;
+	display: block;
+}
+
+#pass{
+	margin: 0 auto;
+	display: block;
+}
+
+#loginsubmit{
+	margin: 0 auto;
+	display: block;
+	border-radius: 2px 2px 2px 2px;
+	background-color: #3dce47;
+	height: auto;
+	width: 50px;
+	padding: 3px;
+	
+	text-align: center;
+}
+
+#loginsubmit:hover{
+	background-color: #2c9333;
+	color: white;
+}
+
+.loginButtonContainer{
+	
+}
+
+.status{
+	text-align:center;
+	font-size 22px;
+	background-color: rgba(255, 0, 0, 0.33);
+	width: 30%;
+	margin:auto;
+	border-radius: 3px 3px 3px 3px;
+}
+
