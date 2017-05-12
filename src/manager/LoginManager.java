@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.QueryHandler;
 import model.User;
 
 public class LoginManager {
 
 	private List<User> registered;
+	private QueryHandler query;
 
 	public LoginManager() {
-		registered = new ArrayList<>();
-		User u1 = new User(0, "suti211@gmail.com", "12345");
-		User u2 = new User(1, "gecigeci12@gmail.com", "12345");
-		User u3 = new User(2, "fagit@gmail.com", "12345");
-		registered.add(u1);
-		registered.add(u2);
-		registered.add(u3);
+		query = new QueryHandler();
+		registered = query.getRegisteredUsers();
+		registered.stream().forEach(System.out::println);
 	}
 
 	public void validateUser(HttpServletRequest request, HttpServletResponse response)
@@ -42,12 +40,15 @@ public class LoginManager {
 						session.setAttribute("user", u);
 						response.sendRedirect("./index.jsp");
 						userMatch = true;
+						System.out.println("Successful login attempt: " + u.getEmail());
 						break;
 					}
 				}
-				// invalid credentials:
-				jspResponse = "invalidSomething";
-				System.out.println("Invalid login attempt: incorrect shit!");
+				if(!userMatch){
+					// invalid credentials:
+					jspResponse = "invalidSomething";
+					System.out.println("Invalid login attempt: incorrect shit!");
+				}
 			} else {
 				// password or email is an empty string
 				jspResponse = "missingData";

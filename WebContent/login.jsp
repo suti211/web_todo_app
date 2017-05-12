@@ -48,7 +48,7 @@
 									if (stat.equals("invalidSomething")) {
 										msg = "<div class='status'>Incorrect credentials!</div>";
 									} else if (stat.equals("missingData")){
-										msg = "<div class='status'>Missing password!</div>";
+										msg = "<div class='status'>Missing password or username!</div>";
 									}
 								}
 								

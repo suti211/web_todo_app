@@ -22,7 +22,6 @@ public class ToDoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		slave.sendTodos(request, response);
 		slave.sendActiveTodos(request, response);
 		slave.sendInactiveTodos(request, response);
